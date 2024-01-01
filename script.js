@@ -39,6 +39,11 @@ function update(timestamp) {
     ui.rect(canvas.width/2, canvas.height/2, canvas.width, canvas.height, [22, 22, 22, 1])
     ui.rect(canvas.width/2, 200*su, canvas.width, 5*su, [255, 255, 255, 1])
 
+    if (wConnect && !document.hidden) {
+        wConnect = false
+        connectToServer()
+    }
+
     if (jKeys["KeyA"] || jKeys["ArrowLeft"] || (mouse.lclick && mouse.x < 100*su)) {
         if (selected > 0) {
             selected--

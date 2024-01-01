@@ -2,6 +2,7 @@
 var ws
 var connected = false
 var got = false
+var wConnect = false
 
 function sendMsg(sendData, bypass=false) {
 	if (ws.readyState == WebSocket.OPEN && (connected || bypass)) {
@@ -30,7 +31,7 @@ function connectToServer() {
             getViews(apps[selected])
             getClicks(cpps[selected])
         }
-        if ("ping" in msg) {
+        if ("ping" in msg && !document.hidden) {
             sendMsg({ping: true})
         }
         if ("views" in msg) {
@@ -53,7 +54,7 @@ function connectToServer() {
     })
     ws.addEventListener("close", (event) => {
 		console.log("Disconnected")
-		connectToServer()
+        wConnect = true
 	})
 }
 
