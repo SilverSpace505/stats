@@ -2,6 +2,9 @@
 utils.setup()
 utils.setStyles()
 
+ui.targetSize.x = 800
+ui.textShadow.bottom = "auto"
+
 var delta = 0
 var lastTime = 0
 var su = 0
@@ -33,10 +36,10 @@ function update(timestamp) {
     ui.resizeCanvas()
     ui.getSu()
 
-    ui.rect(canvas.width/2, canvas.height/2, canvas.width, canvas.height, [180, 180, 180, 1])
-    ui.rect(canvas.width/2, 200*su, canvas.width, 5*su, [0, 0, 0, 1])
+    ui.rect(canvas.width/2, canvas.height/2, canvas.width, canvas.height, [22, 22, 22, 1])
+    ui.rect(canvas.width/2, 200*su, canvas.width, 5*su, [255, 255, 255, 1])
 
-    if (jKeys["KeyA"] || jKeys["ArrowLeft"] || (mouse.lclick && mouse.x < 300*su)) {
+    if (jKeys["KeyA"] || jKeys["ArrowLeft"] || (mouse.lclick && mouse.x < 100*su)) {
         if (selected > 0) {
             selected--
             got = false
@@ -45,7 +48,7 @@ function update(timestamp) {
             getClicks(cpps[selected])
         }
     }
-    if (jKeys["KeyD"] || jKeys["ArrowRight"] || (mouse.lclick && mouse.x > canvas.width-300*su)) {
+    if (jKeys["KeyD"] || jKeys["ArrowRight"] || (mouse.lclick && mouse.x > canvas.width-100*su)) {
         if (selected < apps.length-1) {
             selected++
             got = false
@@ -78,7 +81,7 @@ function update(timestamp) {
         ui.text(canvas.width/2, canvas.height/2-250*su, 50*su, "Views", {align: "center"})
         ui.text(canvas.width/2-250*su, canvas.height/2-250*su, 30*su, "Total: "+views.views)
         ui.text(canvas.width/2+250*su, canvas.height/2-250*su, 30*su, "Online: "+online, {align: "right"})
-        ui.rect(canvas.width/2, canvas.height/2-65.5*su, 640*su, 300*su, [255, 255, 255, 1], 10*su, [0, 0, 0, 1])
+        ui.rect(canvas.width/2, canvas.height/2-65.5*su, 640*su, 300*su, [255, 255, 255, 1], 10*su, [127, 127, 127, 1])
         let recent = {}
         let day = Math.round(new Date().getTime()/1000 / 86400) - 19720
         let max = 0
@@ -110,7 +113,7 @@ function update(timestamp) {
     if (clicks) {
         ui.text(canvas.width/2, canvas.height/2-250*su + y, 50*su, "Clicks", {align: "center"})
         ui.text(canvas.width/2-250*su, canvas.height/2-250*su + y, 30*su, "Total: "+clicks.clicks)
-        ui.rect(canvas.width/2, canvas.height/2-65.5*su + y, 630*su, 300*su, [255, 255, 255, 1], 10*su, [0, 0, 0, 1])
+        ui.rect(canvas.width/2, canvas.height/2-65.5*su + y, 630*su, 300*su, [255, 255, 255, 1], 10*su, [127, 127, 127, 1])
         let recent = {}
         let day = Math.round(new Date().getTime()/1000 / 86400) - 19720
         let max = 0
