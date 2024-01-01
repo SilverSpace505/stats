@@ -62,10 +62,10 @@ function update(timestamp) {
         views = null
     }
 
-    if (jKeys["KeyW"] || jKeys["ArrowUp"]) {
+    if (jKeys["KeyW"] || jKeys["ArrowUp"] || (mouse.lclick && mouse.y < 100*su)) {
         points += 1
     }
-    if (jKeys["KeyS"] || jKeys["ArrowDown"]) {
+    if (jKeys["KeyS"] || jKeys["ArrowDown"] || (mouse.lclick && mouse.y > canvas.height-100*su)) {
         points -= 1
     }
 
