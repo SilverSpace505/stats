@@ -21,6 +21,9 @@ ws.addEventListener("message", (event) => {
         getViews(apps[selected])
         getClicks(cpps[selected])
     }
+    if ("ping" in msg) {
+        sendMsg({ping: true})
+    }
     if ("views" in msg) {
         if (!got) {
             got = true
