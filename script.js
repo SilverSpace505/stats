@@ -13,12 +13,16 @@ var views = null
 var clicks = null
 var online = 0
 
-var apps = ["powerfall", "jims-adventure", "tritag", "silver", "speedwing", "battle-cubes", "the-farlands", "earth", "life-3", "life-2", "life", "sand"]
-var cpps = ["Powerfall", "Jim's Adventure", "Tritag", "Silver", "Speedwing", "Battle Cubes", "The Farlands", "Earth", "Life 3", "Life 2", "Life", "SAND"]
-var selected = 3
+var apps = ["silver", "speedwing", "battle-cubes", "road-weaver", "space-shoote-ai", "the-farlands", "earth", "life-3", "life-2", "life", "sand", "powerfall", "jims-adventure", "tritag"]
+var cpps = ["Silver", "Speedwing", "Battle Cubes", "Road Weaver", "Space Shooter AI", "The Farlands", "Earth", "Life 3", "Life 2", "Life", "SAND", "Powerfall", "Jim's Adventure", "Tritag"]
+var selected = 0
 
-var points = 7
+var points = 30
 var gotTime = 0
+
+var appsDrop = new ui.Dropdown(cpps)
+appsDrop.bgColour = [22, 22, 22, 1]
+appsDrop.outlineColour = [255, 255, 255, 1]
 
 function getViews(app) {
     sendMsg({getViews: app, online: app})
@@ -47,21 +51,29 @@ function update(timestamp) {
     if (jKeys["KeyA"] || jKeys["ArrowLeft"] || (mouse.lclick && mouse.x < 100*su)) {
         if (selected > 0) {
             selected--
+            appsDrop.selected = selected
             got = false
             gotTime
             getViews(apps[selected])
             getClicks(cpps[selected])
         }
     }
-    if (jKeys["KeyD"] || jKeys["ArrowRight"] || (mouse.lclick && mouse.x > canvas.width-100*su)) {
+    if (jKeys["KeyD"] || jKeys["ArrowRight"] || (mouse.lclick && mouse.x > canvas.width-100*su && mouse.y > 100*su && !appsDrop.open)) {
         if (selected < apps.length-1) {
             selected++
+            appsDrop.selected = selected
             got = false
             gotTime = 0
             getViews(apps[selected])
             getClicks(cpps[selected])
         }
     }
+
+    let dw = 300*su
+    appsDrop.set(canvas.width - 20*su - dw/2, 45*su, dw, 50*su)
+    appsDrop.set2(25*su, 5*su)
+    appsDrop.basic()
+    appsDrop.draw()
 
     gotTime += delta
     if (!got && gotTime >= 0.2) {
@@ -70,11 +82,20 @@ function update(timestamp) {
         views = null
     }
 
-    if (jKeys["KeyW"] || jKeys["ArrowUp"] || (mouse.lclick && mouse.y < 100*su)) {
+    if (jKeys["KeyW"] || jKeys["ArrowUp"] || (mouse.lclick && mouse.y < 100*su && mouse.x < canvas.width - dw - 20*su)) {
         points += 1
     }
     if (jKeys["KeyS"] || jKeys["ArrowDown"] || (mouse.lclick && mouse.y > canvas.height-100*su)) {
         points -= 1
+    }
+    if (jKeys["KeyE"]) {
+        points += 5
+    }
+    if (jKeys["KeyQ"]) {
+        points -= 5
+    }
+    if (jKeys["KeyR"]) {
+        points = 30
     }
 
     ui.text(canvas.width/2, 100*su, 100*su, cpps[selected], {align: "center"})
@@ -149,6 +170,14 @@ function update(timestamp) {
     ui.text(mouse.x+10, mouse.y+15+15*su, 25*su, hoverText)
 
     input.updateInput()
+}
+
+appsDrop.changed = (value) => {
+    selected = appsDrop.selected
+    got = false
+    gotTime = 0
+    getViews(apps[selected])
+    getClicks(cpps[selected])
 }
 
 requestAnimationFrame(update) 
