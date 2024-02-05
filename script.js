@@ -17,6 +17,8 @@ var apps = ["silver", "platformer", "speedwing", "battle-cubes", "road-weaver", 
 var cpps = ["Silver", "Platformer", "Speedwing", "Battle Cubes", "Road Weaver", "Space Shooter AI", "The Farlands", "Earth", "Life 3", "Life 2", "Life", "SAND", "Powerfall", "Jim's Adventure", "Tritag"]
 var selected = 0
 
+var dayNames = ["Sunday", "Monday", "Tuesday", "Wensday", "Thursday", "Friday", "Saturday"]
+
 var points = 30
 var gotTime = 0
 
@@ -124,7 +126,7 @@ function update(timestamp) {
             if (i in recent) {
                 let h = recent[i] / max
                 let date = new Date((i+day-points+1 + 19720)*86400*1000)
-                let datet = date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate()
+                let datet = dayNames[date.getDay()] + " | " + date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate()
                 let rect = [canvas.width/2-630/2*su + i*(630/points)*su + (630/points/2)*su, canvas.height/2-65.5*su + 140*su - h*140 * su, (630/points/1.1)*su, h*280*su]
                 ui.rect(...rect, [0, 127, 255, 1])
                 ui.text(canvas.width/2-630/2*su + i*(630/points)*su + (630/points/2)*su, canvas.height/2-65.5*su + 120*su, 20*su, recent[i].toString(), {align: "center"})
