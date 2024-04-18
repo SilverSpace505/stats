@@ -1,5 +1,6 @@
 
 utils.setup()
+utils.ignoreSafeArea()
 utils.setStyles()
 
 ui.targetSize.x = 800
