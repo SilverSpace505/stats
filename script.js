@@ -73,7 +73,7 @@ function update(timestamp) {
     }
 
     let dw = 300*su
-    appsDrop.set(canvas.width - 20*su - dw/2, 45*su, dw, 50*su)
+    appsDrop.set(canvas.width - 80*su - dw/2, 45*su, dw, 50*su)
     appsDrop.set2(25*su, 5*su)
     appsDrop.basic()
     appsDrop.draw()
