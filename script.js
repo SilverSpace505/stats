@@ -172,6 +172,8 @@ function update(timestamp) {
 
     ui.text(mouse.x+10, mouse.y+15+15*su, 25*su, hoverText)
 
+    ui.text(50*su, 30*su, 35*su, Math.round(latencyV)+"ms")
+
     input.updateInput()
 }
 

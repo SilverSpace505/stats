@@ -10,6 +10,13 @@ function sendMsg(sendData, bypass=false) {
 	}
 }
 
+var startP = 0
+var latencyV = 0
+
+function latency() {
+    console.log(Math.round(latencyV)+"ms")
+}
+
 function connectToServer() {
     connected = false
     console.log("Connecting...")
@@ -33,6 +40,10 @@ function connectToServer() {
         }
         if ("ping" in msg && !document.hidden) {
             sendMsg({ping: true})
+            startP = performance.now()
+        }
+        if ("pingR" in msg) {
+            latencyV = performance.now()-startP
         }
         if ("views" in msg) {
             if (!got) {
