@@ -14,8 +14,8 @@ var views = null
 var clicks = null
 var online = 0
 
-var apps = ["silver", "platformer", "speedwing", "battle-cubes", "road-weaver", "space-shoote-ai", "the-farlands", "earth", "life-3", "life-2", "life", "sand", "powerfall", "jims-adventure", "tritag"]
-var cpps = ["Silver", "Platformer", "Speedwing", "Battle Cubes", "Road Weaver", "Space Shooter AI", "The Farlands", "Earth", "Life 3", "Life 2", "Life", "SAND", "Powerfall", "Jim's Adventure", "Tritag"]
+var apps = ["silver", "pyramids-of-giza", "platformer", "speedwing", "battle-cubes", "road-weaver", "space-shoote-ai", "the-farlands", "earth", "life-3", "life-2", "life", "sand", "powerfall", "jims-adventure", "tritag"]
+var cpps = ["Silver", "Pyramids of Giza", "Platformer", "Speedwing", "Battle Cubes", "Road Weaver", "Space Shooter AI", "The Farlands", "Earth", "Life 3", "Life 2", "Life", "SAND", "Powerfall", "Jim's Adventure", "Tritag"]
 var selected = 0
 
 var dayNames = ["Sunday", "Monday", "Tuesday", "Wensday", "Thursday", "Friday", "Saturday"]
