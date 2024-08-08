@@ -37,13 +37,22 @@ function connectToServer() {
             console.log("Connected")
             getViews(apps[selected])
             getClicks(cpps[selected])
+            startP = performance.now()
+            sendMsg({testPing: true})
         }
         if ("ping" in msg && !document.hidden) {
             sendMsg({ping: true})
-            startP = performance.now()
+            if (!mouse.ldown) {
+                startP = performance.now()
+                sendMsg({testPing: true})
+            }
         }
-        if ("pingR" in msg) {
+        if ("testPing" in msg) {
             latencyV = performance.now()-startP
+            if (mouse.ldown) {
+                startP = performance.now()
+                sendMsg({testPing: true})
+            }
         }
         if ("views" in msg) {
             if (!got) {

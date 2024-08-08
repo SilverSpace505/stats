@@ -100,6 +100,9 @@ function update(timestamp) {
     if (jKeys["KeyR"]) {
         points = 30
     }
+    if (mouse.lclick) {
+        sendMsg({testPing: true})
+    }
 
     ui.text(canvas.width/2, 100*su, 100*su, cpps[selected], {align: "center"})
 
