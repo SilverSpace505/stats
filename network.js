@@ -17,6 +17,8 @@ function latency() {
     console.log(Math.round(latencyV)+"ms")
 }
 
+var latencies = []
+
 function connectToServer() {
     connected = false
     console.log("Connecting...")
@@ -49,6 +51,10 @@ function connectToServer() {
         }
         if ("testPing" in msg) {
             latencyV = performance.now()-startP
+            latencies.push(latencyV)
+            if (latencies.length > 50) {
+                latencies.splice(0, 1)
+            }
             if (mouse.ldown) {
                 startP = performance.now()
                 sendMsg({testPing: true})

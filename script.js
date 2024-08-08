@@ -101,6 +101,8 @@ function update(timestamp) {
         points = 30
     }
     if (mouse.lclick) {
+        latencies = []
+        startP = performance.now()
         sendMsg({testPing: true})
     }
 
@@ -177,6 +179,20 @@ function update(timestamp) {
 
     ui.text(80*su, 50*su, 50*su, Math.round(latencyV)+"ms")
 
+    if (mouse.ldown) {
+        let poses = []
+
+        for (let i in latencies) {
+            poses.push([210*su - i*5, 200*su - latencies[i]*su])
+        }
+
+        if (poses.length > 0) {
+            ui.path(poses, 5*su, [0, 127, 255, 1])
+        }
+    
+
+    }
+    
     input.updateInput()
 }
 
