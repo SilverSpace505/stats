@@ -5,6 +5,7 @@ var got = false
 var wConnect = false
 
 function sendMsg(sendData, bypass=false) {
+    // console.log("sending", sendData)
 	if (ws.readyState == WebSocket.OPEN && (connected || bypass)) {
 		ws.send(JSON.stringify(sendData))
 	}
@@ -34,6 +35,7 @@ function connectToServer() {
     
     ws.addEventListener("message", (event) => {
         var msg = JSON.parse(event.data)
+        // console.log("receiving", msg)
         if ("connected" in msg) {
             connected = true
             console.log("Connected")
@@ -47,9 +49,12 @@ function connectToServer() {
             if (!mouse.ldown) {
                 startP = performance.now()
                 sendMsg({testPing: true})
+            } else {
+                console.log("prevented")
             }
         }
         if ("testPing" in msg) {
+            // console.log("huh")
             latencyV = performance.now()-startP
             latencies.push(latencyV)
             if (latencies.length > 100) {

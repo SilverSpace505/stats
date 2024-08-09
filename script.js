@@ -188,7 +188,7 @@ function update(timestamp) {
         // console.log(delta)
 
         for (let i in latencies) {
-            poses.push([210*su+125*su - i*5, 200*su - latencies[i]/max*100*su])
+            poses.push([200*su+125*su - i*3*su, 200*su - latencies[i]/max*100*su])
         }
 
         if (poses.length > 0) {
