@@ -27,6 +27,8 @@ var appsDrop = new ui.Dropdown(cpps)
 appsDrop.bgColour = [22, 22, 22, 1]
 appsDrop.outlineColour = [255, 255, 255, 1]
 
+var showSpeed = false
+
 function getViews(app) {
     sendMsg({getViews: app, online: app})
 }
@@ -49,6 +51,15 @@ function update(timestamp) {
     if (wConnect && !document.hidden) {
         wConnect = false
         connectToServer()
+    }
+
+    let jShowSpeed = false
+
+    if (mouse.lclick && mouse.x < 300*su && mouse.y > canvas.height-300*su) {
+        showSpeed = !showSpeed
+        if (showSpeed) {
+            jShowSpeed = true
+        }
     }
 
     if (jKeys["KeyA"] || jKeys["ArrowLeft"] || (mouse.lclick && mouse.x < 100*su)) {
@@ -100,7 +111,7 @@ function update(timestamp) {
     if (jKeys["KeyR"]) {
         points = 30
     }
-    if (mouse.lclick) {
+    if (jShowSpeed) {
         latencies = []
         startP = performance.now()
         sendMsg({testPing: true})
@@ -179,7 +190,7 @@ function update(timestamp) {
 
     ui.text(80*su, 50*su, 50*su, Math.round(latencyV)+"ms")
 
-    if (mouse.ldown) {
+    if (showSpeed) {
         let poses = []
         if (latencies.length > 0) {
             max = utils.lerp(max, Math.max(...latencies), delta)

@@ -46,11 +46,9 @@ function connectToServer() {
         }
         if ("ping" in msg && !document.hidden) {
             sendMsg({ping: true})
-            if (!mouse.ldown) {
+            if (!showSpeed) {
                 startP = performance.now()
                 sendMsg({testPing: true})
-            } else {
-                console.log("prevented")
             }
         }
         if ("testPing" in msg) {
@@ -60,7 +58,7 @@ function connectToServer() {
             if (latencies.length > 100) {
                 latencies.splice(0, 1)
             }
-            if (mouse.ldown) {
+            if (showSpeed) {
                 startP = performance.now()
                 sendMsg({testPing: true})
             }
