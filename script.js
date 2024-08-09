@@ -181,20 +181,27 @@ function update(timestamp) {
 
     if (mouse.ldown) {
         let poses = []
+        if (latencies.length > 0) {
+            max = utils.lerp(max, Math.max(...latencies), delta)
+        }
+     
+        // console.log(delta)
 
         for (let i in latencies) {
-            poses.push([210*su - i*5, 200*su - latencies[i]*su])
+            poses.push([210*su+125*su - i*5, 200*su - latencies[i]/max*100*su])
         }
 
         if (poses.length > 0) {
             ui.path(poses, 5*su, [0, 127, 255, 1])
         }
     
-
+        ui.text(350*su, 100*su, 20*su, Math.round(Math.max(...latencies))+"ms")
     }
     
     input.updateInput()
 }
+
+let max = 100
 
 appsDrop.changed = (value) => {
     selected = appsDrop.selected

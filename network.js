@@ -52,7 +52,7 @@ function connectToServer() {
         if ("testPing" in msg) {
             latencyV = performance.now()-startP
             latencies.push(latencyV)
-            if (latencies.length > 50) {
+            if (latencies.length > 100) {
                 latencies.splice(0, 1)
             }
             if (mouse.ldown) {
